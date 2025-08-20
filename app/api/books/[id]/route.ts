@@ -75,7 +75,7 @@ export async function PUT(
     const updatedBook = await prisma.book.update({
       where: { id },
       data: {
-        read: read,
+        ...(typeof read === "boolean" && { read }),
       },
     });
 
