@@ -1,0 +1,172 @@
+# Tests
+
+## Variables
+
+@baseUrl = http://localhost:3000
+@contentType = application/json
+
+### GET - Voir tous les livres (liste vide au début)
+GET {{baseUrl}}/api/books
+
+### POST - Ajouter un premier livre
+POST {{baseUrl}}/api/books
+Content-Type: {{contentType}}
+
+{
+  "title": "L'Étranger",
+  "author": "Albert Camus",
+  "genre": "Roman",
+  "read": false
+}
+
+### POST - Ajouter un deuxieme livre
+POST {{baseUrl}}/api/books
+Content-Type: {{contentType}}
+
+{
+  "title": "Le Petit Prince",
+  "author": "Antoine de Saint-Exupéry",
+  "genre": "Conte philosophique",
+  "read": false
+}
+
+### POST - Ajouter un troisieme livre
+POST {{baseUrl}}/api/books
+Content-Type: {{contentType}}
+
+{
+  "title": "1984",
+  "author": "George Orwell",
+  "genre": "Dystopie",
+  "read": true
+}
+
+### GET - Voir tous les livres ajoutés (3 livres)
+GET {{baseUrl}}/api/books
+
+### PUT - Modifier un livre par son ID
+PUT {{baseUrl}}/api/books/1
+Content-Type: {{contentType}}
+
+{
+  "title": "L'Étranger",
+  "author": "Albert Camus",
+  "genre": "Roman",
+  "read": true
+}
+
+### GET - Vérifier que le livre a été modifié
+GET {{baseUrl}}/api/books
+
+### DELETE - Supprimer le livre avec ID 1
+DELETE {{baseUrl}}/api/books/1
+
+### GET - Vérifier que le livre a été supprimé
+GET {{baseUrl}}/api/books
+
+### DELETE - Supprimer le livre avec ID 6
+DELETE {{baseUrl}}/api/books/6
+
+### DELETE - Supprimer le livre avec ID 7
+DELETE {{baseUrl}}/api/books/7
+
+### GET - Vérifier que la liste est vide
+GET {{baseUrl}}/api/books
+
+### - POST - Ajouter un livre avec un string dans read
+POST {{baseUrl}}/api/books
+Content-Type: {{contentType}}
+
+{
+  "title": "L’Autre",
+  "author": "Andrée Chedid",
+  "genre": "Roman",
+  "read": "banane"
+}
+
+### GET - Vérifier que le livre a quand meme été ajouté
+GET {{baseUrl}}/api/books
+
+## TESTS D'ERREURS
+
+### Erreur 1 - POST - Ajouter un livre avec titre vide
+POST {{baseUrl}}/api/books
+Content-Type: {{contentType}}
+
+{
+  "title": "",
+  "author": "Andrée Chedid",
+  "genre": "Roman",
+  "read": false
+}
+
+### Erreur 2 - POST - Ajouter un livre sans auteur
+POST {{baseUrl}}/api/books
+Content-Type: {{contentType}}
+
+{
+  "title": "L’Autre",
+  "genre": "Roman",
+  "read": false
+}
+
+### Erreur 3 - POST - Ajouter un livre avec 44 (Entier) comme valeur dans genre
+POST {{baseUrl}}/api/books
+Content-Type: {{contentType}}
+
+{
+  "title": "L’Autre",
+  "author": "Andrée Chedid",
+  "genre": 44,
+  "read": false
+}
+
+### Erreur 4 - PUT - Modifier un livre avec un ID inexistant
+PUT {{baseUrl}}/api/books/19
+Content-Type: {{contentType}}
+
+{
+  "title": "La Belle et la Bête",
+  "author": "Jeanne-Marie Leprince de Beaumont",
+  "genre": "Conte merveilleux",
+  "read": true
+}
+
+### Erreur 5 - DELETE - Supprimer un livre avec un ID inexistant
+DELETE {{baseUrl}}/api/books/19
+
+### Erreur 6 - DELETE - Supprimer un livre avec un ID invalide
+DELETE {{baseUrl}}/api/books/pomme
+
+### Erreur 7 - PUT - Modifier un livre avec un ID invalide
+PUT {{baseUrl}}/api/books/pomme
+Content-Type: {{contentType}}
+
+{
+  "title": "La Belle et la Bête",
+  "author": "Jeanne-Marie Leprince de Beaumont",
+  "genre": "Conte merveilleux",
+  "read": false
+}
+
+### Erreur 8 - PUT - Modifier un livre avec auteur vide
+PUT {{baseUrl}}/api/books/9
+Content-Type: {{contentType}}
+
+{
+  "title": "L’Autre",
+  "author": "",
+  "genre": "Roman",
+  "read": true
+}
+
+### Erreur 9 - PUT - Modifier un livre avec 44 (Entier) comme valeur dans genre
+PUT {{baseUrl}}/api/books
+Content-Type: {{contentType}}
+
+{
+  "title": "L’Autre",
+  "author": "Andrée Chedid",
+  "genre": 44,
+  "read": false
+}
