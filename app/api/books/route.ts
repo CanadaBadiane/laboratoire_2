@@ -82,7 +82,7 @@ export async function POST(request: NextRequest) {
       { status: 201 }
     );
   } catch (error) {
-    console.log("Erreur lors de l'ajout du livre:", error);
+    console.error("Erreur lors de l'ajout du livre:", error);
     return NextResponse.json(
       {
         success: false,
