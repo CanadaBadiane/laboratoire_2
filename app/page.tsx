@@ -23,7 +23,7 @@ export default function HomePage() {
           href="/books"
           className="bg-green-600 text-white px-5 py-3 rounded-md font-medium hover:bg-green-700 transition-colors"
         >
-          📖 Voir la liste
+          📖 Voir mes livres
         </Link>
       </div>
     </div>

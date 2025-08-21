@@ -58,6 +58,7 @@ export default function EditBook() {
       const json = await res.json();
       if (!res.ok || json.success !== true)
         throw new Error(json.error || "Modification impossible");
+      alert("Livre modifié avec succès !");
       router.push(`/books/`);
     } catch (e: any) {
       setError(e.message);
@@ -103,7 +104,7 @@ export default function EditBook() {
           />
         </div>
         <div>
-          <label className="block mb-1">Lu</label>
+          <label className="block mb-1">Statut</label>
           <select
             className="border rounded w-full p-2"
             value={read}

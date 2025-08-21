@@ -41,6 +41,7 @@ export default function CataloguePage() {
     const res = await fetch(`/api/books/${id}`, { method: "DELETE" });
     if (res.ok) {
       await load();
+      alert("Livre supprimé avec succès !");
     } else {
       const j = await res.json().catch(() => ({}));
       alert(j.error || "Suppression impossible");
@@ -50,9 +51,9 @@ export default function CataloguePage() {
   return (
     <main className="container mx-auto p-8">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-semibold">Produits</h1>
+        <h1 className="text-2xl font-semibold">Mes Livres</h1>
         <Link className="underline" href="/books/new">
-          Nouveau livre
+          Ajouter un nouveau livre
         </Link>
       </div>
 
@@ -68,9 +69,7 @@ export default function CataloguePage() {
             className="flex items-center justify-between border p-3 rounded"
           >
             <div>
-              <Link className="font-medium underline" href={`/books/${b.id}`}>
-                {b.title}
-              </Link>
+              <div className="font-medium">{b.title}</div>
               <div className="text-sm text-gray-600">
                 {b.author} • {b.genre} • {b.read ? "Lu" : "Non lu"}
               </div>

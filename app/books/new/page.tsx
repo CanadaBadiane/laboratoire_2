@@ -32,6 +32,7 @@ export default function AddNewBook() {
       if (!res.ok || json.success !== true) {
         throw new Error(json.error || "Création du livre impossible");
       }
+      alert("Livre ajouté avec succès !");
       router.push("/books");
     } catch (e: any) {
       setError(e.message);
@@ -96,7 +97,7 @@ export default function AddNewBook() {
         </div>
 
         <div>
-          <label className="block mb-1">Lu</label>
+          <label className="block mb-1">Statut</label>
           <select
             className="border rounded w-full p-2"
             value={read}
@@ -109,10 +110,10 @@ export default function AddNewBook() {
         </div>
 
         <button
-          type="submit"
+          disabled={submit}
           className="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-700 transition-colors"
         >
-          Ajouter
+          {submit ? "En cours..." : "Ajouter"}
         </button>
       </form>
     </div>
