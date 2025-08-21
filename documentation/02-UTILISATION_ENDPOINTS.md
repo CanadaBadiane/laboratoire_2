@@ -318,3 +318,57 @@ Une erreur peut apparaitre si tu essaies de supprimer un livre avec un ID inexis
   "error": "ID du livre invalide"
 }
 ```
+
+### Méthode GET
+
+Cette méthode permet de rechercher un livre spécifique par son ID.
+
+Pour effectuer cette requete vous devez faire comme suit:
+
+**Exemple correct:**
+
+**URL** : `GET http://localhost:3000/api/books/1`
+
+**Réponse attendue:**
+
+```json
+{
+  "success": true,
+  "data": {
+    "id": 1,
+    "title": "Le Petit Prince",
+    "author": "Antoine de Saint-Exupéry",
+    "genre": "Conte philosophique",
+    "read": false
+  },
+  "message": "Livre trouvé"
+}
+```
+
+Vous pouvez cependant créer une erreur si vous essayez de donner un ID inexistant ou invalide.
+
+**Exemple non-correct:**
+
+**URL** : `GET http://localhost:3000/api/books/876`
+
+**Réponse attendue:**
+
+```json
+{
+  "success": false,
+  "error": "Livre non trouvé"
+}
+```
+
+**Exemple non-correct:**
+
+**URL** : `GET http://localhost:3000/api/books/pomme`
+
+**Réponse attendue:**
+
+```json
+{
+  "success": false,
+  "error": "ID du livre invalide"
+}
+```

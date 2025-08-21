@@ -718,6 +718,108 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Obtenir un livre par ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"L’Autre\",\r\n  \"author\": \"Andrée Chedid\",\r\n  \"genre\": 44,\r\n  \"read\": true\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/books/9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"books",
+						"9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtenir un livre par ID avec un ID inexistant",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"L’Autre\",\r\n  \"author\": \"Andrée Chedid\",\r\n  \"genre\": 44,\r\n  \"read\": true\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/books/876",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"books",
+						"876"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtenir un livre par ID avec un ID invalide",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"L’Autre\",\r\n  \"author\": \"Andrée Chedid\",\r\n  \"genre\": 44,\r\n  \"read\": true\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/books/pomme",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"books",
+						"pomme"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

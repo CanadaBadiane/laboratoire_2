@@ -44,6 +44,9 @@ Content-Type: {{contentType}}
 ### GET - Voir tous les livres ajoutés (3 livres)
 GET {{baseUrl}}/api/books
 
+### GET - Obtenir un livre par ID
+GET {{baseUrl}}/api/books/1
+
 ### PUT - Modifier un livre par son ID
 PUT {{baseUrl}}/api/books/1
 Content-Type: {{contentType}}
@@ -170,3 +173,9 @@ Content-Type: {{contentType}}
   "genre": 44,
   "read": false
 }
+
+### Erreur 10 - GET - Obtenir un livre par ID avec un ID inexistant
+GET {{baseUrl}}/api/books/876
+
+### Erreur 11 - GET - Obtenir un livre par ID avec un ID invalide
+GET {{baseUrl}}/api/books/pomme
