@@ -1,17 +1,44 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
-export default function AjouterLivrePage() {
-  const [titre, setTitre] = useState("");
-  const [auteur, setAuteur] = useState("");
-  const [description, setDescription] = useState("");
+export default function AddNewBook() {
+  const router = useRouter();
+  const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState("");
+  const [genre, setGenre] = useState("");
+  const [read, setRead] = useState("");
+  const [submit, setSubmit] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    console.log("Livre ajouté :", { titre, auteur, description });
-    // Tu peux envoyer les données à une API ici
-  };
+    setError(null);
+    setSubmit(true);
+    try {
+      const body = {
+        title: title.trim(),
+        author: author.trim(),
+        genre: genre.trim(),
+        read: read,
+      };
+      const res = await fetch("/api/books", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      const json = await res.json();
+      if (!res.ok || json.success !== true) {
+        throw new Error(json.error || "Création du livre impossible");
+      }
+      router.push("/books");
+    } catch (e: any) {
+      setError(e.message);
+    } finally {
+      setSubmit(false);
+    }
+  }
 
   return (
     <div className="max-w-xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
@@ -27,8 +54,8 @@ export default function AjouterLivrePage() {
           <input
             id="titre"
             type="text"
-            value={titre}
-            onChange={(e) => setTitre(e.target.value)}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
             required
             className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
@@ -44,8 +71,8 @@ export default function AjouterLivrePage() {
           <input
             id="auteur"
             type="text"
-            value={auteur}
-            onChange={(e) => setAuteur(e.target.value)}
+            value={author}
+            onChange={(e) => setAuthor(e.target.value)}
             required
             className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
@@ -53,17 +80,32 @@ export default function AjouterLivrePage() {
 
         <div>
           <label
-            htmlFor="description"
+            htmlFor="auteur"
             className="block text-sm font-medium text-gray-700 mb-1"
           >
-            Description :
+            Genre :
           </label>
-          <textarea
-            id="description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            className="w-full border border-gray-300 rounded-md px-4 py-2 h-24 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+          <input
+            id="genre"
+            type="text"
+            value={genre}
+            onChange={(e) => setGenre(e.target.value)}
+            required
+            className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
+        </div>
+
+        <div>
+          <label className="block mb-1">Lu</label>
+          <select
+            className="border rounded w-full p-2"
+            value={read}
+            onChange={(e) => setRead(e.target.value)}
+            required
+          >
+            <option value="Non lu">Non lu</option>
+            <option value="Lu">Lu</option>
+          </select>
         </div>
 
         <button
