@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
+// Page ajouter un nouveau livre
 export default function AddNewBook() {
   const router = useRouter();
   const [title, setTitle] = useState("");
@@ -12,6 +13,7 @@ export default function AddNewBook() {
   const [submit, setSubmit] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // Création d'un nouveau livre avec POST depuis l'API
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
@@ -41,6 +43,7 @@ export default function AddNewBook() {
     }
   }
 
+  // Formulaire d'ajout d'un nouveau livre
   return (
     <div className="max-w-xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
       <h2 className="text-2xl font-bold mb-6 text-center">Ajouter un livre</h2>

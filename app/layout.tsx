@@ -2,6 +2,7 @@ import "./globals.css";
 import Header from "./Header";
 import Footer from "./Footer";
 
+// Mise en page principale
 export default function RootLayout({
   children,
 }: {
@@ -9,7 +10,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr">
-      <head />
+      <head>
+        <link rel="icon" href="/favicon.png" type="image/png" />
+      </head>
       <body className="bg-gray-50 text-gray-900">
         <Header />
         <div className="flex min-h-screen">

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 
+// Page d'accueil
 export default function HomePage() {
   return (
     <div className="max-w-2xl mx-auto mt-12 p-6 bg-white rounded-lg shadow-md text-center">
@@ -12,12 +13,13 @@ export default function HomePage() {
         Gère tes livres, ajoute de nouvelles lectures et explore ta collection.
       </p>
 
+      {/* Liens vers "Ajouter un livre" et "Catalogue" */}
       <div className="flex flex-col sm:flex-row justify-center gap-4">
         <Link
           href="/books/new"
           className="bg-blue-600 text-white px-5 py-3 rounded-md font-medium hover:bg-blue-700 transition-colors"
         >
-          ➕ Ajouter un livre
+          ✚ Ajouter un livre
         </Link>
         <Link
           href="/books"

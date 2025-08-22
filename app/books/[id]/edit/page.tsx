@@ -11,6 +11,7 @@ type Book = {
   read: boolean;
 };
 
+// Page modification d'un livre
 export default function EditBook() {
   const router = useRouter();
   const params = useParams();
@@ -25,6 +26,7 @@ export default function EditBook() {
   useEffect(() => {
     if (!id) return;
 
+    // Charge un livre spécifique avec GET depuis l'API
     async function load() {
       try {
         const res = await fetch(`/api/books/${id}`);
@@ -43,6 +45,7 @@ export default function EditBook() {
     load();
   }, [id]);
 
+  // Utilisation de la méthode PUT depuis l'API pour la modification d'un livre
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setSaving(true);
@@ -73,6 +76,7 @@ export default function EditBook() {
     return <main className="container mx-auto p-8 text-red-700">{error}</main>;
   if (!book) return null;
 
+  // Formulaire de modification d'un livre
   return (
     <main className="container mx-auto p-8 max-w-lg">
       <h1 className="text-2xl font-semibold mb-6">

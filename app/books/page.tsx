@@ -11,14 +11,16 @@ type Book = {
   read: boolean;
 };
 
+// Page Catalogue
 export default function CataloguePage() {
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  const [searchMode, setSearchMode] = useState("titre");
+  const [searchMode, setSearchMode] = useState("genre");
   const [searchTerm, setSearchTerm] = useState("");
 
+  // Charge tous les livres depuis l'API
   async function load() {
     try {
       setLoading(true);
@@ -39,6 +41,7 @@ export default function CataloguePage() {
     load();
   }, []);
 
+  // Utilisation de la méthode DELETE depuis l'API pour supprimer un livre
   async function handleDelete(id: number) {
     if (!confirm("Voulez-vous supprimer ce livre ?")) return;
     const res = await fetch(`/api/books/${id}`, { method: "DELETE" });
@@ -51,6 +54,7 @@ export default function CataloguePage() {
     }
   }
 
+  // Fonctionnalité de filtrage
   const filteredBooks = books.filter((book) => {
     const term = searchTerm.toLowerCase();
     if (searchMode === "title") return book.title.toLowerCase().includes(term);
