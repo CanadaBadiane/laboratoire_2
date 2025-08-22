@@ -16,6 +16,9 @@ export default function CataloguePage() {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
+  const [searchMode, setSearchMode] = useState("titre");
+  const [searchTerm, setSearchTerm] = useState("");
+
   async function load() {
     try {
       setLoading(true);
@@ -48,6 +51,15 @@ export default function CataloguePage() {
     }
   }
 
+  const filteredBooks = books.filter((book) => {
+    const term = searchTerm.toLowerCase();
+    if (searchMode === "title") return book.title.toLowerCase().includes(term);
+    if (searchMode === "author")
+      return book.author.toLowerCase().includes(term);
+    if (searchMode === "genre") return book.genre.toLowerCase().includes(term);
+    return true;
+  });
+
   return (
     <main className="container mx-auto p-8">
       <div className="flex items-center justify-between mb-6">
@@ -57,13 +69,38 @@ export default function CataloguePage() {
         </Link>
       </div>
 
+      <div className="mb-6 flex flex-col md:flex-row items-center gap-4">
+        <select
+          value={searchMode}
+          onChange={(e) => setSearchMode(e.target.value)}
+          className="border rounded px-3 py-2"
+        >
+          <option value="title">Titre</option>
+          <option value="author">Auteur</option>
+          <option value="genre">Genre</option>
+        </select>
+
+        <input
+          type="text"
+          placeholder={`Rechercher par ${
+            searchMode === "title"
+              ? "titre"
+              : searchMode === "author"
+              ? "auteur"
+              : "genre"
+          }`}
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="border rounded px-4 py-2 w-full md:w-64"
+        />
+      </div>
+
       {loading && <p>Chargement...</p>}
       {error && <p className="text-red-600">{error}</p>}
-
-      {!loading && books.length === 0 && <p>Aucun livre.</p>}
+      {!loading && filteredBooks.length === 0 && <p>Aucun livre trouvé.</p>}
 
       <ul className="space-y-3">
-        {books.map((b) => (
+        {filteredBooks.map((b) => (
           <li
             key={b.id}
             className="flex items-center justify-between border p-3 rounded"
