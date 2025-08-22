@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Projet: Bibliothèque personnelle
 
-## Getting Started
+## Description du projet et du domaine métier choisi
 
-First, run the development server:
+Ce projet vise à gérer une bibliothèque personnelle. Il te permet de voir ta liste de livres, d'ajouter un nouveau livre, de modifier et de supprimer un livre existant dans ta liste, tout cela dans une interface moderne, agréable et intuitive.
+
+## Instructions d'installation et de configuration
+
+### Étape 1 : Cloner et installer
+
+```bash
+git clone [https://github.com/CanadaBadiane/laboratoire_2.git]
+cd laboratoire_2
+npm install
+```
+
+### Étape 2 : Configurer la base de données
+
+1. Créez un compte sur [Neon.tech](https://neon.tech)
+2. Créez une nouvelle base de données PostgreSQL
+3. Copiez l'URL de connexion fournie par Neon
+4. Créez un fichier `.env` à la racine du projet :
+
+```bash
+# .env
+DATABASE_URL="postgresql://username:password@hostname:5432/database?sslmode=require"
+```
+
+PS: Il se peut que votre URL de connexion fournie par Neon finisse par:
+
+`&channel_binding=require`
+
+### Étape 3 : Installer Prisma et générer la base de données
+
+```bash
+npm install prisma @prisma/client
+npx prisma generate
+npx prisma db push
+```
+
+### Étape 4 : Démarrer l'application
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ouvrez http://localhost:3000 dans votre navigateur.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Architecture technique et choix de conception
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Technologies utilisées
 
-## Learn More
+- **Next.js 15** (App Router)
+- **TypeScript**
+- **Prisma** (ORM)
+- **PostgreSQL** (Neon.tech)
+- **TailwindCSS** (Framework CSS)
 
-To learn more about Next.js, take a look at the following resources:
+### Prérequis
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Node.js 18+ installé
+- Compte gratuit sur [Neon.tech](https://neon.tech)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Captures d'écran de l'interface utilisateur
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+![alt text](image.png)
+![alt text](image-1.png)
+![alt text](image-2.png)
+![alt text](image-3.png)
